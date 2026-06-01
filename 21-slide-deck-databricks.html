@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>Databricks Corporate 2025 — slide-deck template</title>
+<style>
+/*
+  Databricks Corporate 2025 — slide-deck template
+  ----------------------------------------------------------------------
+  Fixed 1280x720 slides. DM Sans + DM Mono. Coral / dark-teal palette.
+
+  Slide variants demonstrated below:
+    .slide.title-dark     · primary title slide on dark teal
+    .slide.title-coral    · alternate title on coral red
+    .slide.title-white    · light title with grey circle shapes
+    .slide.section-dark   · section divider on dark teal
+    .slide.section-coral  · section divider on coral red
+    .slide.content        · standard content slide (white)
+    .slide.quote-coral    · pull-quote on coral
+    .slide.quote-dark     · pull-quote on dark teal
+    .slide.closing        · centered logo / outro
+
+  Layout helpers (inside .content):
+    .columns-2 · .columns-3 · .card-columns (border-top accent)
+    .split-layout · .full-card · .metric-row + .metric-card · .dt (table)
+
+  Image placeholders: replace these tokens in your fork:
+    {{image:4}}  → databricks_logo_full_transparent.png    (title + closing)
+    {{image:5}}  → databricks_logo_icon_transparent.png    (every content slide, bottom-left)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400&display=swap');
+
+:root {
+  --color-primary:       #FF5B31;
+  --color-primary-light: #FF8C6B;
+  --color-dark:          #1B3139;
+  --color-dark-mid:      #1E4756;
+  --color-white:         #FFFFFF;
+  --color-bg-light:      #F5F5F5;
+  --color-border:        #E0E0E0;
+  --color-body-text:     #1B3139;
+  --font-main:           'DM Sans', sans-serif;
+  --font-mono:           'DM Mono', monospace;
+  --slide-w:             1280px;
+  --slide-h:             720px;
+  --pad-h:               56px;
+  --pad-v:               48px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  width: var(--slide-w);
+  margin: 0; padding: 0;
+  font-family: var(--font-main);
+  font-size: 18px;
+  color: var(--color-body-text);
+  background: var(--color-white);
+  scroll-snap-type: y mandatory;
+}
+
+.slide {
+  width: var(--slide-w);
+  height: var(--slide-h);
+  padding: var(--pad-v) var(--pad-h);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-white);
+  scroll-snap-align: start;
+}
+
+h1 { font-family: var(--font-main); font-size: 44px; font-weight: 700; line-height: 1.1; color: var(--color-body-text); margin: 0 0 8px 0; }
+h2 { font-family: var(--font-main); font-size: 20px; font-weight: 700; color: var(--color-body-text); margin: 0 0 12px 0; }
+h3 { font-family: var(--font-main); font-size: 18px; font-weight: 700; color: var(--color-body-text); margin: 0 0 8px 0; }
+p  { margin: 0 0 12px 0; line-height: 1.5; }
+ul { padding-left: 20px; margin: 8px 0; }
+li { margin-bottom: 8px; line-height: 1.5; }
+
+.subtitle { font-size: 18px; font-weight: 400; color: var(--color-primary); margin: 0 0 32px 0; }
+
+.eyebrow {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--color-primary); margin: 0 0 16px 0;
+}
+
+.author-block { margin-top: auto; }
+.author-block::before {
+  content: ''; display: block; width: 48px; height: 2px;
+  background: var(--color-primary); margin-bottom: 10px;
+}
+.author-name { font-size: 16px; font-weight: 700; color: var(--color-primary); margin: 0; }
+.author-date { font-size: 16px; font-weight: 400; color: inherit; margin: 2px 0 0 0; }
+
+.page-num { position: absolute; bottom: 24px; right: var(--pad-h); font-size: 14px; color: var(--color-body-text); opacity: 0.6; }
+.logo-content { position: absolute; bottom: 22px; left: var(--pad-h); font-family: var(--font-mono); font-size: 10px; color: var(--color-dark-mid); opacity: 0.5; letter-spacing: 0.05em; }
+.logo-title   { position: absolute; bottom: 36px; left: var(--pad-h); font-family: var(--font-mono); font-size: 11px; color: var(--color-white); opacity: 0.7; letter-spacing: 0.08em; }
+
+/* ── Title (dark teal) ───────────────────── */
+.slide.title-dark { background: var(--color-dark); color: var(--color-white); justify-content: flex-start; }
+.title-dark h1 { color: var(--color-white); font-size: 56px; max-width: 680px; margin-top: 60px; }
+.title-dark .eyebrow { color: var(--color-primary); }
+.title-dark .author-name { color: var(--color-primary); }
+.title-dark .author-date { color: var(--color-white); }
+.title-dark .page-num    { color: var(--color-white); }
+.title-dark .deco-triangle {
+  position: absolute; right: 80px; top: 20px;
+  width: 0; height: 0;
+  border-left: 130px solid transparent; border-right: 130px solid transparent;
+  border-bottom: 225px solid var(--color-primary);
+}
+.title-dark .deco-circle  { position: absolute; right: 220px; bottom: 10px; width: 210px; height: 210px; border-radius: 50%; background: var(--color-primary); }
+.title-dark .deco-square  { position: absolute; right: 20px; bottom: 10px; width: 195px; height: 195px; background: var(--color-primary); }
+
+/* ── Title (coral) ───────────────────────── */
+.slide.title-coral { background: var(--color-primary); color: var(--color-white); justify-content: flex-start; }
+.title-coral h1 { color: var(--color-white); font-size: 56px; max-width: 660px; margin-top: 60px; }
+.title-coral .eyebrow { color: var(--color-white); }
+.title-coral .author-name { color: var(--color-white); font-weight: 700; }
+.title-coral .author-date { color: var(--color-white); }
+.title-coral .page-num    { color: var(--color-white); }
+.title-coral .deco-arch {
+  position: absolute; right: 30px; top: -30px;
+  width: 320px; height: 400px;
+  border-radius: 160px 160px 0 0;
+  background: rgba(255,255,255,0.18);
+}
+.title-coral .deco-circle-sm { position: absolute; right: 190px; bottom: 40px; width: 160px; height: 160px; border-radius: 50%; background: rgba(180,50,10,0.35); }
+.title-coral .deco-square-sm { position: absolute; right: 20px; bottom: 40px; width: 160px; height: 160px; background: rgba(180,50,10,0.35); }
+
+/* ── Title (white) ───────────────────────── */
+.slide.title-white { background: var(--color-white); color: var(--color-body-text); justify-content: flex-start; }
+.title-white h1 { font-size: 56px; max-width: 660px; margin-top: 60px; color: var(--color-dark); }
+.title-white .deco-circle-lg { position: absolute; right: 40px; top: 0; width: 340px; height: 340px; border-radius: 50%; background: #EBEBEB; }
+.title-white .deco-circle-md { position: absolute; right: 40px; top: 290px; width: 280px; height: 280px; border-radius: 50%; background: #E0E0E0; }
+.title-white .deco-circle-sm { position: absolute; right: 100px; top: 530px; width: 200px; height: 200px; border-radius: 50%; background: #EBEBEB; }
+
+/* ── Section divider (dark teal) ─────────── */
+.slide.section-dark { background: var(--color-dark); color: var(--color-white); justify-content: flex-start; }
+.section-dark h1 { color: var(--color-white); font-size: 72px; font-weight: 700; max-width: 900px; margin-top: 24px; }
+.section-dark .eyebrow { color: var(--color-primary); margin-top: 60px; }
+.section-dark .page-num { color: var(--color-white); opacity: 0.5; }
+.section-dark .deco-tri-large {
+  position: absolute; right: 60px; bottom: 40px;
+  width: 0; height: 0;
+  border-left: 160px solid transparent; border-right: 160px solid transparent;
+  border-bottom: 280px solid rgba(255,255,255,0.07);
+}
+.section-dark .deco-tri-small {
+  position: absolute; right: 0; bottom: 40px;
+  width: 0; height: 0;
+  border-left: 120px solid transparent; border-right: 120px solid transparent;
+  border-top: 210px solid rgba(255,255,255,0.07);
+}
+
+/* ── Section divider (coral) ─────────────── */
+.slide.section-coral { background: var(--color-primary); color: var(--color-white); justify-content: flex-start; }
+.section-coral h1 { color: var(--color-white); font-size: 72px; font-weight: 700; max-width: 900px; margin-top: 24px; }
+.section-coral .eyebrow { color: var(--color-white); margin-top: 60px; }
+.section-coral .page-num { color: var(--color-white); opacity: 0.5; }
+
+/* ── Content slide ───────────────────────── */
+.slide.content { background: var(--color-white); }
+.content h1 { font-size: 40px; color: var(--color-dark); margin-bottom: 4px; }
+
+/* ── Columns ─────────────────────────────── */
+.columns-2 { display: flex; flex-direction: row; gap: 48px; flex: 1; margin-top: 24px; }
+.columns-3 { display: flex; flex-direction: row; gap: 32px; flex: 1; margin-top: 24px; }
+.col { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+/* ── Card columns (border-top accent) ─────── */
+.card-columns { display: flex; flex-direction: row; gap: 0; flex: 1; margin-top: 32px; }
+.card-col {
+  flex: 1;
+  border-top: 3px solid var(--color-primary);
+  padding: 20px 20px 20px 0;
+  margin-right: 24px;
+}
+.card-col:last-child { margin-right: 0; }
+.card-col h2 { font-size: 18px; color: var(--color-dark); margin-bottom: 16px; }
+
+/* ── Split + Full card ───────────────────── */
+.split-layout { display: flex; flex-direction: row; gap: 40px; flex: 1; margin-top: 24px; align-items: stretch; }
+.split-layout .text-panel { flex: 1; }
+.split-layout .visual-card { flex: 1; background: var(--color-bg-light); border-radius: 8px; padding: 32px; display: flex; flex-direction: column; }
+.full-card { flex: 1; margin-top: 24px; background: var(--color-bg-light); border-radius: 8px; padding: 32px; display: flex; flex-direction: column; }
+
+/* ── Metric cards ────────────────────────── */
+.metric-row { display: flex; gap: 16px; margin-top: 24px; }
+.metric-card { flex: 1; background: var(--color-bg-light); border-radius: 8px; padding: 18px 20px; border-top: 3px solid var(--color-primary); }
+.metric-card .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-dark-mid); margin-bottom: 8px; }
+.metric-card .val { font-size: 32px; font-weight: 700; color: var(--color-dark); line-height: 1; }
+.metric-card .sub { font-size: 12px; color: var(--color-dark-mid); margin-top: 6px; }
+.metric-card.hero .val { color: var(--color-primary); font-size: 56px; }
+
+/* ── Data table ──────────────────────────── */
+.dt { width: 100%; border-collapse: collapse; font-size: 14px; }
+.dt th, .dt td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--color-border); }
+.dt th { font-family: var(--font-mono); font-weight: 400; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-dark-mid); }
+.dt td.num { font-family: var(--font-mono); text-align: right; }
+.dt tr.hl td { background: rgba(255,91,49,0.07); font-weight: 700; }
+
+/* ── Quote slide ─────────────────────────── */
+.slide.quote-coral { background: var(--color-primary); color: var(--color-white); justify-content: center; align-items: flex-start; }
+.quote-coral blockquote, .quote-dark blockquote {
+  font-size: 48px; font-weight: 700; line-height: 1.2;
+  max-width: 1050px; margin: 0 0 40px 0; color: var(--color-white);
+}
+.slide.quote-dark  { background: var(--color-dark);    color: var(--color-white); justify-content: center; align-items: flex-start; }
+.quote-attribution { font-size: 18px; font-weight: 400; text-align: right; width: 100%; color: inherit; opacity: 0.85; }
+
+/* ── Closing slide ───────────────────────── */
+.slide.closing { background: var(--color-white); justify-content: center; align-items: center; }
+.closing .logo-center { font-family: var(--font-mono); font-size: 14px; color: var(--color-dark); letter-spacing: 0.1em; opacity: 0.7; }
+
+/* ── Counter ─────────────────────────────── */
+#counter { position: fixed; bottom: 12px; right: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--color-dark-mid); background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 999px; border: 1px solid var(--color-border); z-index: 10; }
+
+.footnote { font-family: var(--font-mono); font-size: 10px; color: var(--color-dark-mid); margin-top: 14px; line-height: 1.5; }
+.mono { font-family: var(--font-mono); }
+strong { font-weight: 700; }
+em { font-style: italic; color: var(--color-dark-mid); }
+</style>
+</head>
+<body>
+
+  <!-- ============ S1 — title-dark ============ -->
+  <section class="slide title-dark" id="s1">
+    <div class="eyebrow">Internal · Quarterly Review · Q1 FY27</div>
+    <h1>Project Lighthouse<br>Quarterly Review</h1>
+    <p class="subtitle">A sample title slide on dark teal — replace with your project name.</p>
+    <div class="author-block">
+      <p class="author-name">Author Name · Role</p>
+      <p class="author-date">January 1, 2026</p>
+    </div>
+    <div class="deco-triangle"></div>
+    <div class="deco-circle"></div>
+    <div class="deco-square"></div>
+    <div class="logo-title">{{image:4}}  &lt;!-- databricks_logo_full_transparent.png --&gt;</div>
+  </section>
+
+  <!-- ============ S2 — section-dark ============ -->
+  <section class="slide section-dark" id="s2">
+    <div class="eyebrow">01 · Section divider</div>
+    <h1>Where we stand today.</h1>
+    <div class="deco-tri-large"></div>
+    <div class="deco-tri-small"></div>
+    <div class="page-num">2 / 12</div>
+  </section>
+
+  <!-- ============ S3 — content · columns-2 ============ -->
+  <section class="slide content" id="s3">
+    <div class="eyebrow">02 · Two-column content</div>
+    <h1>Use columns-2 for paired narrative blocks.</h1>
+    <p class="subtitle">Equal-width columns with 48px gap · ideal for compare/contrast and before/after.</p>
+
+    <div class="columns-2">
+      <div class="col">
+        <h2>Before</h2>
+        <ul>
+          <li>Per-workspace endpoints; no central observability.</li>
+          <li>Inconsistent guardrails across teams.</li>
+          <li>Cost attribution by hand.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h2>After</h2>
+        <ul>
+          <li>One control plane; UC governs LLM access.</li>
+          <li>Guardrails defined once, enforced everywhere.</li>
+          <li>Token-level cost attribution to teams.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="logo-content">{{image:5}}</div>
+    <div class="page-num">3 / 12</div>
+  </section>
+
+  <!-- ============ S4 — content · columns-3 + card-columns ============ -->
+  <section class="slide content" id="s4">
+    <div class="eyebrow">03 · Card columns · NOW / NEXT / LATER</div>
+    <h1>Use card-columns for horizon/roadmap layouts.</h1>
+    <p class="subtitle">Border-top accent in coral · three flex columns · short bulleted list per card.</p>
+
+    <div class="card-columns">
+      <div class="card-col">
+        <h2>NOW · shipping</h2>
+        <ul>
+          <li>Capability A · <span class="mono">GA</span></li>
+          <li>Capability B · <span class="mono">Beta</span></li>
+          <li>Capability C · <span class="mono">PuPr</span></li>
+        </ul>
+      </div>
+      <div class="card-col">
+        <h2>NEXT · Q2</h2>
+        <ul>
+          <li>Capability D · Beta</li>
+          <li>Capability E · PrPr</li>
+          <li>Capability F · planned</li>
+        </ul>
+      </div>
+      <div class="card-col">
+        <h2>LATER</h2>
+        <ul>
+          <li>Capability G</li>
+          <li>Capability H</li>
+          <li>Capability I</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="logo-content">{{image:5}}</div>
+    <div class="page-num">4 / 12</div>
+  </section>
+
+  <!-- ============ S5 — content · split-layout ============ -->
+  <section class="slide content" id="s5">
+    <div class="eyebrow">04 · Split layout · text + visual</div>
+    <h1>Pair narrative with a visual or screenshot.</h1>
+    <p class="subtitle">Two flex columns; right side has light-grey card with 32px padding and 8px radius.</p>
+
+    <div class="split-layout">
+      <div class="text-panel">
+        <h2>What customers asked for</h2>
+        <p>One centralized control plane for AI traffic — across every model, provider, and workspace. With audit, cost attribution, and guardrails enforced consistently.</p>
+        <h2 style="margin-top:18px;">Why now</h2>
+        <p>Agent sprawl turns simple governance questions into C-suite issues. The shift from single LLM calls to multi-step agentic workflows broke per-workspace governance.</p>
+      </div>
+      <div class="visual-card">
+        <h2 style="color: var(--color-dark);">Visual slot</h2>
+        <p style="color: #888;">Architecture diagram, screenshot, or chart goes here.<br><br>The light-grey card frames the visual without competing with the body text on the left.</p>
+      </div>
+    </div>
+
+    <div class="logo-content">{{image:5}}</div>
+    <div class="page-num">5 / 12</div>
+  </section>
+
+  <!-- ============ S6 — content · metric-row + full-card ============ -->
+  <section class="slide content" id="s6">
+    <div class="eyebrow">05 · Metrics + full-card table</div>
+    <h1>Lead with the headline number, then back it up.</h1>
+    <p class="subtitle">Metric cards above · supporting data in a full-card or dt table below.</p>
+
+    <div class="metric-row">
+      <div class="metric-card hero">
+        <div class="lbl">Hero metric</div>
+        <div class="val">12T</div>
+        <div class="sub">tokens · week 1,789 customers</div>
+      </div>
+      <div class="metric-card">
+        <div class="lbl">Growth</div>
+        <div class="val">0 → 4B</div>
+        <div class="sub">weekly tokens in one quarter</div>
+      </div>
+      <div class="metric-card">
+        <div class="lbl">Adoption</div>
+        <div class="val">730</div>
+        <div class="sub">customers in first month</div>
+      </div>
+    </div>
+
+    <table class="dt" style="margin-top: 24px;">
+      <thead><tr><th>Quarter</th><th class="num">Total</th><th class="num">Δ Q-o-Q</th></tr></thead>
+      <tbody>
+        <tr><td>FY26-Q2</td><td class="num">614</td><td class="num">—</td></tr>
+        <tr><td>FY26-Q3</td><td class="num">525</td><td class="num">−14.5%</td></tr>
+        <tr><td>FY26-Q4</td><td class="num">409</td><td class="num">−22.1%</td></tr>
+        <tr class="hl"><td>FY27-Q1</td><td class="num">520</td><td class="num">+27.1%</td></tr>
+      </tbody>
+    </table>
+
+    <p class="footnote">Source · <span class="mono">your_source_table_here</span></p>
+    <div class="logo-content">{{image:5}}</div>
+    <div class="page-num">6 / 12</div>
+  </section>
+
+  <!-- ============ S7 — quote-coral ============ -->
+  <section class="slide quote-coral" id="s7">
+    <blockquote>
+      "We pioneered unified governance.<br>Now we extend it from data to AI."
+    </blockquote>
+    <div class="quote-attribution">— Pull-quote on coral · ≤14 words is the sweet spot</div>
+    <div class="page-num">7 / 12</div>
+  </section>
+
+  <!-- ============ S8 — quote-dark ============ -->
+  <section class="slide quote-dark" id="s8">
+    <blockquote>
+      "AI proposes.<br>Engineer guides the outcome."
+    </blockquote>
+    <div class="quote-attribution">— Same pattern on dark teal</div>
+    <div class="page-num">8 / 12</div>
+  </section>
+
+  <!-- ============ S9 — section-coral ============ -->
+  <section class="slide section-coral" id="s9">
+    <div class="eyebrow">02 · Section divider (coral)</div>
+    <h1>What we ship next.</h1>
+    <div class="page-num">9 / 12</div>
+  </section>
+
+  <!-- ============ S10 — title-coral ============ -->
+  <section class="slide title-coral" id="s10">
+    <div class="eyebrow">Internal · Launch</div>
+    <h1>Launch Day<br>FY27 Q2</h1>
+    <p class="subtitle" style="color: rgba(255,255,255,0.9);">A high-energy title alternate · use for launch / kickoff / DAIS announcements.</p>
+    <div class="author-block">
+      <p class="author-name">Author Name</p>
+      <p class="author-date">June 15, 2026</p>
+    </div>
+    <div class="deco-arch"></div>
+    <div class="deco-circle-sm"></div>
+    <div class="deco-square-sm"></div>
+    <div class="logo-title">{{image:4}}</div>
+  </section>
+
+  <!-- ============ S11 — title-white ============ -->
+  <section class="slide title-white" id="s11">
+    <div class="eyebrow">Internal · Reference</div>
+    <h1>Lighter Variant<br>Reference Deck</h1>
+    <p class="subtitle">Soft circles on the right · use for read-along / reference / docs-style decks.</p>
+    <div class="author-block">
+      <p class="author-name">Author Name</p>
+      <p class="author-date">March 1, 2026</p>
+    </div>
+    <div class="deco-circle-lg"></div>
+    <div class="deco-circle-md"></div>
+    <div class="deco-circle-sm"></div>
+    <div class="logo-content">{{image:5}}</div>
+    <div class="page-num">11 / 12</div>
+  </section>
+
+  <!-- ============ S12 — closing ============ -->
+  <section class="slide closing" id="s12">
+    <div class="logo-center">{{image:4}}  &lt;!-- databricks_logo_full_transparent.png centered --&gt;</div>
+    <div class="page-num">12 / 12</div>
+  </section>
+
+  <div id="counter">1 / 12</div>
+
+<script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    let current = 0;
+    function go(i) {
+      current = Math.max(0, Math.min(slides.length - 1, i));
+      slides[current].scrollIntoView({ behavior: 'smooth' });
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp'   || e.key === 'PageUp')                    { e.preventDefault(); go(current - 1); }
+    });
+    const obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          current = slides.indexOf(en.target);
+          counter.textContent = (current + 1) + ' / ' + slides.length;
+        }
+      });
+    }, { threshold: 0.5 });
+    slides.forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+</body>
+</html>
