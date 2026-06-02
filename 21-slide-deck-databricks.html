@@ -228,6 +228,30 @@ li { margin-bottom: 8px; line-height: 1.5; }
 .mono { font-family: var(--font-mono); }
 strong { font-weight: 700; }
 em { font-style: italic; color: var(--color-dark-mid); }
+
+/* ── Print: each slide = one landscape page, no clipping, no chrome ──
+   Cmd+P → Paper size: 1280×720 pixels (or 13.33×7.5 inches) · Margins: None · ✓ Background graphics */
+@page { size: 1280px 720px; margin: 0; }
+@media print {
+  html, body {
+    width: 1280px; height: auto;
+    background: var(--color-white) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body { scroll-snap-type: none; overflow: visible; }
+  .slide {
+    width: 1280px; height: 720px;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: none;
+  }
+  .slide:last-of-type { page-break-after: auto; break-after: auto; }
+  #counter { display: none; }
+  a { color: inherit; text-decoration: underline; }
+}
 </style>
 </head>
 <body>
